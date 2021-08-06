@@ -1,11 +1,12 @@
 import React from 'react'
-
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 //Components
+import Loading from './Components/Loading'
+import Home from './Components/Home'
 import Header from './Components/Header'
 import FindAndFilter from './Components/FindAndFilter'
-//Styling
-import './App.css'
+import Error from './Components/Error'
 
 class App extends React.Component {
 
@@ -13,62 +14,88 @@ class App extends React.Component {
     super()
     this.state = {
       respones: [],
-      loading: false,
+      loading: true,
       search: "",
       filter: "",
       error: []
     }
     this.searchHandler = this.searchHandler.bind(this)
     this.filterHander = this.filterHander.bind(this)
+    this.fetchAll = this.fetchAll.bind(this)
   }
+
   //functions
-  searchHandler = (e) => {
+
+  fetchAll() {
+    fetch('https://restcountries.eu/rest/v2/all')
+      .then(res => res.json())
+      .then(data => {
+        //updating state of apiResponses
+        this.setState({
+          respones: data,
+          loading: false,
+          filter: "",
+        })
+      })
+  }
+
+  searchHandler(e) {
     const { name, value } = e.target
 
-    //managing filter inputs
-    this.setState({
-      [name]: value
-    })
+    console.log(e.target)
 
-    //setting loading before fetching
-    this.setState({
-      loading: true
-    })
 
-    //fetch the filter response
-    if (value !== "") {
-      try {
-        fetch(`https://restcountries.eu/rest/v2/name/${value}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.status === 404) {
-              this.setState({
-                error: "error retrivng information",
-                loading: false
-              })
-              console.log(this.state.error)
-            } else {
-              //updating states
-              this.setState({
-                respones: data,
-                loading: false
-              })
-              console.log(this.state.respones)
-            }
+    //check if input is only letter/space key
+    if (value.match(/^[a-zA-Z\s]*$/)) {
 
-          })
-          .catch(error => {
-            console.error('Error:', error)
-          })
+      //managing filter inputs
+      this.setState({
+        [name]: value
+      })
+
+      //setting loading before fetching
+      this.setState({
+        loading: true,
+        error: ""
+      })
+
+      //fetch the filter response
+      if (value.trim() !== "") {
+        try {
+          fetch(`https://restcountries.eu/rest/v2/name/${value}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data.status === 404) {
+                this.setState({
+                  error: "Something Went South :/",
+                  loading: false
+                })
+                console.log(this.state.error)
+              } else {
+                //updating states
+                this.setState({
+                  respones: data,
+                  loading: false
+                })
+                console.log(this.state.respones)
+              }
+
+            })
+            .catch(error => {
+              console.error('Error:', error)
+            })
+        }
+
+        catch (error) {
+          console.error('Error:', error)
+        }
       }
-
-      catch (error) {
-        console.error('Error:', error)
+      else {
+        //if blank then fetch all the flags
+        this.fetchAll()
       }
 
     }
-
-
 
   }
 
@@ -82,7 +109,8 @@ class App extends React.Component {
 
     //setting loading before fetching
     this.setState({
-      loading: true
+      loading: true,
+      error: ""
     })
 
     //fetch the filter response
@@ -91,7 +119,7 @@ class App extends React.Component {
       .then(data => {
         if (data.status === 404) {
           this.setState({
-            error: "error retrivng information",
+            error: "Something Went South :/",
             loading: false
           })
           console.log(this.state.error)
@@ -111,7 +139,8 @@ class App extends React.Component {
 
     //setting loading to true
     this.setState({
-      loading: true
+      loading: true,
+      error: ""
     })
 
     //calling each all endpoint of restcountries
@@ -123,25 +152,22 @@ class App extends React.Component {
           respones: data,
           loading: false
         })
-        console.log(this.state.respones)
+        console.log(this.state.respones[0].name)
       })
   }
 
   render() {
     return (
       <div className="App">
-        {this.state.loading ?
-          <h1>Loading...</h1> :
-          <h1>
-            Loaded
-          </h1>
-        }
+        <Router>
 
-        <Header />
-        <FindAndFilter
-          data={this.state}
-          searchHandler={this.searchHandler}
-          filterHander={this.filterHander} />
+          <Header fetchAll={this.fetchAll} />
+          <FindAndFilter
+            data={this.state}
+            searchHandler={this.searchHandler}
+            filterHander={this.filterHander} />
+          <Home data={this.state} />
+        </Router>
       </div>
     )
   }

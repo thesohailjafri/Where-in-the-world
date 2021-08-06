@@ -1,15 +1,20 @@
 import React from 'react'
-
+import { HiSearch } from 'react-icons/hi'
 function FindAndFilter(props) {
     const { search, filter } = props.data
+
     return (
-        <div>
+        <nav>
             <label>
+                <HiSearch />
+
                 <input
                     name="search"
                     value={search}
                     onChange={props.searchHandler}
+
                     placeholder="Search for a country..."
+
                 >
                 </input>
             </label>
@@ -19,6 +24,8 @@ function FindAndFilter(props) {
                 value={filter}
                 onChange={props.filterHander}
             >
+
+                <option selected hidden>Filter By Region</option>
                 <option
                     value="africa">Africa</option>
                 <option
@@ -30,7 +37,7 @@ function FindAndFilter(props) {
                 <option
                     value="oceania">Oceania</option>
             </select>
-        </div>
+        </nav>
     )
 }
 

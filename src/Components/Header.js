@@ -1,11 +1,11 @@
 import React from 'react'
-
-function Header() {
+import { HiOutlineMoon } from 'react-icons/hi'
+function Header(props) {
     return (
-        <div>
-            <h1>Where in the world?</h1>
-            <h2>Dark Mode</h2>
-        </div>
+        <header>
+            <h1 onClick={props.fetchAll}>Where in the world?</h1>
+            <h2><HiOutlineMoon />Dark Mode</h2>
+        </header>
     )
 }
 
