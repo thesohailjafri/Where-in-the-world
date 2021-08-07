@@ -1,7 +1,6 @@
 import React from 'react'
 import loadingSvg from '../Static/SVG/loadingSvg.svg'
 function Loading() {
-    console.log(loadingSvg)
 
     return (
         <div className="loader">

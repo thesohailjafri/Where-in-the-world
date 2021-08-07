@@ -12,7 +12,11 @@ function Country(props) {
                 <p><b>Population: </b>{population}</p>
                 <p><b>Region: </b>{region}</p>
                 <p><b>Capital: </b>{capital}</p>
-                <Link to={`/country/${name}`} >hi</Link>
+                <Link to={`/country/${name}`} >
+                    <button>
+                        <b>View Details</b>
+                    </button>
+                </Link>
             </section>
         </div>
     )

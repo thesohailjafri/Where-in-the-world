@@ -129,9 +129,6 @@ nav select {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
   height: 55px;
   background-color: white;
   border-radius: 5px;
@@ -175,14 +172,11 @@ nav select {
 
 .country {
   width: 260px;
-  min-height: 340px;
-  max-height: 360px;
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1.5px 3px;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 1.5px 3px;
-  padding-bottom: 25px;
 }
 
 .country img {
@@ -194,7 +188,104 @@ nav select {
 
 .country section {
   width: 100%;
-  padding: 25px 25px 0 25px;
+  padding: 25px 25px 25px 25px;
+}
+
+.country button {
+  margin-top: 20px;
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+.country button:hover {
+  cursor: pointer;
+}
+
+.links {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.singleCountry {
+  margin: 75px;
+}
+
+.singleCountry button {
+  width: 140px;
+  height: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-bottom: 75px;
+  background-color: white;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.singleCountry button svg {
+  margin-right: 10px;
+}
+
+.singleCountry img {
+  max-width: 560px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.singleCountry section h1 {
+  margin: 35px 0;
+}
+
+.singleCountry .countryContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-column-gap: 120px;
+          column-gap: 120px;
+}
+
+.singleCountry .details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-column-gap: 120px;
+          column-gap: 120px;
+}
+
+.singleCountry .details3 {
+  margin-top: 75px;
+}
+
+.singleCountry .details3 p span {
+  line-height: 30px;
+  background-color: white;
+  border-radius: 2.5px;
+  margin-left: 10px;
+  padding: 2.5px 25px;
+  font-size: 14px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
 }
 
 @-webkit-keyframes rotateImg {

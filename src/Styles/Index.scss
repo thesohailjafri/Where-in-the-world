@@ -104,7 +104,7 @@ nav {
 
     select {
         display: flex;
-        appearance: none;
+        // appearance: none;
         height: 55px;
         background-color: $White;
         border-radius: 5px;
@@ -143,13 +143,11 @@ nav {
 
 .country {
     width: 260px;
-    min-height: 340px;
-    max-height: 360px;
     border-radius: 10px;
     overflow: hidden;
     background-color: $White;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1.5px 3px;
-    padding-bottom: 25px;
+
 
     img {
         width: 100%;
@@ -159,7 +157,91 @@ nav {
 
     section {
         width: 100%;
-        padding: 25px 25px 0 25px;
+        padding: 25px 25px 25px 25px;
+    }
+
+    button {
+        margin-top: 20px;
+        background-color: $Very-Light-Gray;
+        padding: 10px;
+        border-radius: 5px;
+        transition: .1s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.links {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.singleCountry {
+    margin: 75px;
+
+    button {
+        width: 140px;
+        height: 40px;
+        font-weight: 600;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-bottom: 75px;
+        background-color: $White;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            margin-right: 10px;
+        }
+
+    }
+
+    img {
+        max-width: 560px;
+        max-height: 400px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    section {
+        h1 {
+            margin: 35px 0;
+        }
+    }
+
+    .countryContainer {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 120px;
+    }
+
+    .details {
+        display: flex;
+        flex-direction: row;
+        column-gap: 120px;
+
+    }
+
+    .details3 {
+        margin-top: 75px;
+
+        p {
+            span {
+                line-height: 30px;
+                background-color: $White;
+                border-radius: 2.5px;
+                margin-left: 10px;
+                padding: 2.5px 25px;
+                font-size: 14px;
+
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+            }
+        }
     }
 }
 

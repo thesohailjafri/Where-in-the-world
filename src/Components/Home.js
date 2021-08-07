@@ -7,13 +7,15 @@ function Home(props) {
         <>
             {props.data.loading ?
                 <Loading /> :
-                props.data.error ?
-                    <h1>{props.data.error}</h1> :
-                    <main className="countries">
-                        {props.data.respones.map((item) => {
+                <main className="countries">
+                    {props.data.error ?
+                        <h2>{props.data.error}.</h2>
+                        :
+                        props.data.respones.map((item) => {
                             return (<Country data={item} />)
                         })}
-                    </main>
+                </main>
+
             }
         </>
     )
