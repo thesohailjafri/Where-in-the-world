@@ -2,13 +2,21 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 
-function SingleCountry() {
+function SingleCountry(props) {
     const { name } = useParams()
     const [country, setCountry] = React.useState([])
 
+    const style1 = {
+        'background-color': props.data.theme.element,
+        'color': props.data.theme.text,
+    }
+
+    console.log({ props })
+
+
     React.useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`)
+            const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
             const country = await response.json()
             setCountry(country)
             console.log(country)
@@ -19,7 +27,7 @@ function SingleCountry() {
         <div className="singleCountry">
 
             <Link to='/'>
-                <button><HiArrowNarrowLeft />Back</button>
+                <button style={style1}><HiArrowNarrowLeft />Back</button>
             </Link>
 
             {country &&
@@ -59,11 +67,16 @@ function SingleCountry() {
                                     </div>
                                     {borders[0] && <div className="details3">
                                         <p><b>Borders Countries: </b>
-                                            {borders[0] && <span>{borders[0]}</span>}
-                                            {borders[1] && <span>{borders[1]}</span>}
-                                            {borders[2] && <span>{borders[2]}</span>}</p>
-                                    </div>}
 
+                                            {
+                                                borders.map(item => {
+                                                    return (
+                                                        <span style={style1}>{item}</span>
+                                                    )
+                                                })
+                                            }
+                                        </p>
+                                    </div>}
                                 </section>
                             </div>
                         </>)

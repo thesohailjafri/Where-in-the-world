@@ -21,6 +21,10 @@ code {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   outline: none;
+  -webkit-transition: color .5s ease;
+  transition: color .5s ease;
+  -webkit-transition: background-color .5s ease;
+  transition: background-color .5s ease;
 }
 
 body {
@@ -80,15 +84,17 @@ nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  row-gap: 30px;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 75px;
   padding: 0 75px;
-  margin: 30px 0;
+  margin: 50px 0;
 }
 
 nav label {
@@ -106,7 +112,7 @@ nav label {
 
 nav label svg {
   margin: 0 35px;
-  height: 22.5px;
+  height: 25px;
   color: #858585;
   width: auto;
 }
@@ -126,9 +132,15 @@ nav label input:focus {
 }
 
 nav select {
+  cursor: pointer;
+  min-width: 150px;
+  text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   height: 55px;
   background-color: white;
   border-radius: 5px;
@@ -196,8 +208,6 @@ nav select {
   background-color: #fafafa;
   padding: 10px;
   border-radius: 5px;
-  -webkit-transition: .1s ease-in-out;
-  transition: .1s ease-in-out;
 }
 
 .country button:hover {
@@ -232,6 +242,7 @@ nav select {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  cursor: pointer;
 }
 
 .singleCountry button svg {
@@ -277,6 +288,18 @@ nav select {
   margin-top: 75px;
 }
 
+.singleCountry .details3 p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  row-gap: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .singleCountry .details3 p span {
   line-height: 30px;
   background-color: white;
@@ -284,8 +307,55 @@ nav select {
   margin-left: 10px;
   padding: 2.5px 25px;
   font-size: 14px;
+  cursor: pointer;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
           box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 18px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-column-gap: 5px;
+            column-gap: 5px;
+  }
+  header {
+    padding: 0px 30px;
+  }
+  nav {
+    padding: 0px 30px;
+    margin: 30px 0;
+  }
+  nav label {
+    width: 100%;
+  }
+  nav label input {
+    width: 100%;
+  }
+  .countries {
+    padding: 0px 30px;
+  }
+  .country {
+    width: 100%;
+  }
+  .country img {
+    height: 200px;
+  }
+  .singleCountry {
+    margin: 30px;
+  }
+  .singleCountry .countryContainer h1 {
+    font-size: 22px;
+  }
 }
 
 @-webkit-keyframes rotateImg {

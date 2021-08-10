@@ -3,16 +3,23 @@ import { HiSearch } from 'react-icons/hi'
 function FindAndFilter(props) {
     const { search, filter } = props.data
 
+    const style1 = {
+        'background-color': props.data.theme.element,
+        'color': props.data.theme.text,
+    }
+
+
+
     return (
         <nav>
-            <label>
-                <HiSearch />
+            <label style={style1}>
+                <HiSearch style={style1} />
 
                 <input
                     name="search"
                     value={search}
-                    onChange={props.searchHandler}
-
+                    onChange={props.fetchData}
+                    style={style1}
                     placeholder="Search for a country..."
 
                 >
@@ -22,7 +29,8 @@ function FindAndFilter(props) {
             <select
                 name="filter"
                 value={filter}
-                onChange={props.filterHander}
+                onChange={props.fetchData}
+                style={style1}
             >
 
                 <option selected hidden>Filter By Region</option>

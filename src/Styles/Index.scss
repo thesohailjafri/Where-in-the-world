@@ -16,6 +16,10 @@ code {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     outline: none;
+
+    transition: color .5s ease;
+    transition: background-color .5s ease;
+
 }
 
 body {
@@ -58,16 +62,16 @@ header {
     background-color: $White;
     padding: 0 75px;
     box-shadow: rgba(0, 0, 0, .1) 0px 1.5px 3px;
-
 }
 
 nav {
     display: flex;
+    flex-wrap: wrap;
+    row-gap: 30px;
     justify-content: space-between;
     align-items: center;
-    height: 75px;
     padding: 0 75px;
-    margin: 30px 0;
+    margin: 50px 0;
 
 
     label {
@@ -79,7 +83,7 @@ nav {
 
         svg {
             margin: 0 35px;
-            height: 22.5px;
+            height: 25px;
             color: $Dark-Gray;
             width: auto;
         }
@@ -103,8 +107,12 @@ nav {
 
 
     select {
+        cursor: pointer;
+
+        min-width: 150px;
+        text-align: center;
         display: flex;
-        // appearance: none;
+        appearance: none;
         height: 55px;
         background-color: $White;
         border-radius: 5px;
@@ -116,6 +124,9 @@ nav {
     }
 
 }
+
+
+
 
 .loader {
     width: 100%;
@@ -165,7 +176,6 @@ nav {
         background-color: $Very-Light-Gray;
         padding: 10px;
         border-radius: 5px;
-        transition: .1s ease-in-out;
 
         &:hover {
             cursor: pointer;
@@ -193,6 +203,7 @@ nav {
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         svg {
             margin-right: 10px;
@@ -230,7 +241,13 @@ nav {
     .details3 {
         margin-top: 75px;
 
+
         p {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 15px;
+            align-items: center;
+
             span {
                 line-height: 30px;
                 background-color: $White;
@@ -238,10 +255,71 @@ nav {
                 margin-left: 10px;
                 padding: 2.5px 25px;
                 font-size: 14px;
-
+                cursor: pointer;
                 box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
             }
         }
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+    }
+
+    header {
+        padding: 0px 30px;
+    }
+
+    nav {
+        padding: 0px 30px;
+        margin: 30px 0;
+
+
+
+        label {
+            width: 100%;
+
+            input {
+                width: 100%;
+            }
+
+        }
+    }
+
+    .countries {
+        padding: 0px 30px;
+    }
+
+    .country {
+        width: 100%;
+
+        img {
+            height: 200px;
+        }
+    }
+
+    .singleCountry {
+        margin: 30px;
+
+        .countryContainer {
+            h1 {
+                font-size: 22px;
+            }
+
+
+        }
+
     }
 }
 

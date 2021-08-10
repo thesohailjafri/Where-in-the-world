@@ -1,8 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 //Components
-import Loading from './Components/Loading'
 import Home from './Components/Home'
 import Header from './Components/Header'
 import FindAndFilter from './Components/FindAndFilter'
@@ -17,16 +15,24 @@ class App extends React.Component {
       loading: true,
       search: "",
       filter: "",
-      error: ""
+      error: "",
+      mode: true,
+      theme: {
+        text: 'hsl(209, 23%, 22%)',
+        element: 'hsl(0, 0%, 100%)',
+        background: 'hsl(0, 0%, 98%)',
+      }
     }
-    this.searchHandler = this.searchHandler.bind(this)
-    this.filterHander = this.filterHander.bind(this)
+
+    this.fetchData = this.fetchData.bind(this)
     this.fetchAll = this.fetchAll.bind(this)
+    this.switchMode = this.switchMode.bind(this)
   }
 
   //functions
 
-  fetchAll() {
+
+  fetchAll = () => {
     fetch('https://restcountries.eu/rest/v2/all')
       .then(res => res.json())
       .then(data => {
@@ -42,102 +48,137 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  fetchData = (e) => {
 
-  searchHandler(e) {
+    e.preventDefault()
+
     const { name, value } = e.target
 
-    //check if input is only letter/space key
     if (value.match(/^[a-zA-Z\s]*$/)) {
 
-      //manage state
-      this.setState({
-        [name]: value.trim(),
-        filter: "",
-        loading: true,
-        error: ""
-      })
+      let url, counter
 
-      //if blank the fetch all countries
-      if (value === "") {
-        //if blank then fetch all the flags
-        this.fetchAll()
+      if (name === "search") {
+        url = `https://restcountries.eu/rest/v2/name/${value}`
         this.setState({
-          loading: false,
-          error: "",
+          filter: "",
         })
       }
 
-      //if not blank then search the country
-      if (value !== "") {
-        fetch(`https://restcountries.eu/rest/v2/name/${value}`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.status === 404) {
-              this.setState({
-                error: "No Country Found",
-                loading: false
-              })
-              console.log(this.state.error)
-            } else {
-              //updating states
-              this.setState({
-                respones: data,
-                error: "",
-                loading: false
-              })
-              // console.log(this.state.respones)
-            }
-
-          })
-          .catch(error => console.log(error))
+      if (name === "filter") {
+        url = `https://restcountries.eu/rest/v2/region/${value}`
+        this.setState({
+          search: "",
+        })
       }
 
-    }
+      this.setState({
+        [name]: value.trim(),
+        error: ""
+      })
 
-  }
+      console.log(value)
 
-  filterHander(e) {
-    const { name, value } = e.target
-
-    //managing filter inputs
-    this.setState({
-      [name]: value,
-      search: "",
-      loading: true,
-      error: ""
-    })
-
-    //fetch the filter response
-    fetch(`https://restcountries.eu/rest/v2/region/${value}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 404) {
-          this.setState({
-            error: "No Country Found",
-            loading: false
-          })
-          console.log(this.state.error)
-        } else {
-          //updating states
-          this.setState({
-            respones: data,
-            loading: false
-          })
-          console.log(this.state.respones)
+      clearTimeout(counter)
+      counter = setTimeout(() => {
+        //fetch blank value
+        if (!value) {
+          this.fetchAll()
         }
 
-      })
-      .catch(error => console.log(error))
+        //fetch the value
+        if (value) {
+          fetch(url)
+            .then(res => res.json())
+            .then(data => {
+              if (data.status === 404) {
+                this.setState({
+                  error: "No Country Found",
+                })
+                console.log(this.state.error)
+              } else {
+                //updating states
+                this.setState({
+                  respones: data,
+                })
+              }
+
+            })
+            .catch(error => console.log(error))
+        }
+      }, 200)
+    }
   }
+
+  switchMode = () => {
+
+
+    this.setState({
+      mode: !this.state.mode
+    }, () =>
+      this.applyTheme()
+    )
+
+
+
+
+  }
+
+  applyTheme = () => {
+
+
+    /* colors */
+
+    //light
+    const light_text = 'hsl(209, 23%, 22%)'
+    const light_element = 'hsl(0, 0%, 100%)'
+    const light_background = 'hsl(0, 0%, 98%)'
+
+    //dark
+    const dark_text = 'hsl(0, 0%, 100%)'
+    const dark_element = 'hsl(209, 23%, 22%)'
+    const dark_background = 'hsl(207, 26%, 17%)'
+
+    const _body = document.querySelector('body')
+    if (this.state.mode) {
+      _body.style.backgroundColor = light_background
+      _body.style.color = light_text
+
+      this.setState({
+        theme: {
+          text: light_text,
+          element: light_element,
+          background: light_background,
+        }
+      })
+    }
+
+    if (!this.state.mode) {
+      _body.style.backgroundColor = dark_background
+      _body.style.color = dark_text
+      this.setState({
+        theme: {
+          text: dark_text,
+          element: dark_element,
+          background: dark_background,
+        }
+      })
+    }
+  }
+
 
   //methods
   componentDidMount() {
-
+    this.applyTheme()
     //setting loading to true
     this.setState({
       loading: true,
-      error: ""
+      error: "",
+      filter: "",
+      search: "",
     })
+
+
 
     //calling each all endpoint of restcountries
     fetch('https://restcountries.eu/rest/v2/all')
@@ -146,31 +187,31 @@ class App extends React.Component {
         //updating state of apiResponses
         this.setState({
           respones: data,
-          loading: false
+          loading: false,
         })
-        console.log(this.state.respones[0].name)
       })
       .catch(error => console.log(error))
   }
 
   render() {
+
+
     return (
-      <div className="App">
+      <div className="App" >
         <Router>
-          <Header fetchAll={this.fetchAll} />
+          <Header data={this.state} fetchAll={this.fetchAll} switchMode={this.switchMode} />
           <Switch>
             <Route exact path="/">
               <FindAndFilter
                 data={this.state}
-                searchHandler={this.searchHandler}
-                filterHander={this.filterHander} />
+                fetchData={this.fetchData} />
               <Home data={this.state} />
             </Route>
             <Route exact path="/e">
               <Error />
             </Route>
             <Route path='/country/:name'>
-              <SingleCountry />
+              <SingleCountry data={this.state} />
             </Route>
           </Switch>
         </Router>

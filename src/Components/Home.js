@@ -12,7 +12,7 @@ function Home(props) {
                         <h2>{props.data.error}.</h2>
                         :
                         props.data.respones.map((item) => {
-                            return (<Country data={item} />)
+                            return (<Country key={item.name} c_data={item} data={props.data} />)
                         })}
                 </main>
 
