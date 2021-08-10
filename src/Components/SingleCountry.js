@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, Link, Route, Redirect } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { HiArrowNarrowLeft } from 'react-icons/hi'
 import Loading from './Loading'
 
@@ -23,7 +23,7 @@ function SingleCountry(props) {
                 setLoading(false)
                 setCountry(country)
             } catch (e) {
-                <Redirect to="error" />
+                console.log(e)
             }
 
         }
