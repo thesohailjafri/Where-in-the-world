@@ -74,10 +74,9 @@ class App extends React.Component {
 
       this.setState({
         [name]: value.trim(),
-        error: ""
+        error: "",
+        loading: true
       })
-
-      console.log(value)
 
       clearTimeout(counter)
       counter = setTimeout(() => {
@@ -94,34 +93,29 @@ class App extends React.Component {
               if (data.status === 404) {
                 this.setState({
                   error: "No Country Found",
+                  loading: false
                 })
-                console.log(this.state.error)
               } else {
                 //updating states
                 this.setState({
                   respones: data,
+                  loading: false
                 })
               }
 
             })
             .catch(error => console.log(error))
         }
-      }, 200)
+      }, 100)
     }
   }
 
   switchMode = () => {
-
-
     this.setState({
       mode: !this.state.mode
     }, () =>
       this.applyTheme()
     )
-
-
-
-
   }
 
   applyTheme = () => {
@@ -201,17 +195,20 @@ class App extends React.Component {
         <Router>
           <Header data={this.state} fetchAll={this.fetchAll} switchMode={this.switchMode} />
           <Switch>
+
             <Route exact path="/">
               <FindAndFilter
                 data={this.state}
                 fetchData={this.fetchData} />
               <Home data={this.state} />
             </Route>
-            <Route exact path="/e">
-              <Error />
-            </Route>
+
             <Route path='/country/:name'>
               <SingleCountry data={this.state} />
+            </Route>
+
+            <Route exact path="/*">
+              <Error data={this.state.theme} />
             </Route>
           </Switch>
         </Router>

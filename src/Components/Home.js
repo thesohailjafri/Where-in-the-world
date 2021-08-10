@@ -6,7 +6,7 @@ function Home(props) {
     return (
         <>
             {props.data.loading ?
-                <Loading /> :
+                <Loading data={props.data.theme} /> :
                 <main className="countries">
                     {props.data.error ?
                         <h2>{props.data.error}.</h2>

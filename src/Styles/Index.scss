@@ -135,13 +135,28 @@ nav {
     place-items: center;
 
 
-    img {
+    svg {
         width: 100px;
         height: auto;
         animation: rotateImg infinite 3.5s linear;
+
     }
 }
 
+.error {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    svg {
+        width: 300px;
+        height: auto;
+
+    }
+}
 
 .countries {
     display: flex;
@@ -320,6 +335,16 @@ nav {
 
         }
 
+    }
+
+
+    .error {
+
+        svg {
+            width: 200px;
+            height: auto;
+
+        }
     }
 }
 

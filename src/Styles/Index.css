@@ -160,11 +160,33 @@ nav select {
   place-items: center;
 }
 
-.loader img {
+.loader svg {
   width: 100px;
   height: auto;
   -webkit-animation: rotateImg infinite 3.5s linear;
           animation: rotateImg infinite 3.5s linear;
+}
+
+.error {
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.error svg {
+  width: 300px;
+  height: auto;
 }
 
 .countries {
@@ -355,6 +377,10 @@ nav select {
   }
   .singleCountry .countryContainer h1 {
     font-size: 22px;
+  }
+  .error svg {
+    width: 200px;
+    height: auto;
   }
 }
 
