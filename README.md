@@ -62,8 +62,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/thesohailjafri/Where-in-the-world)
-- Live Site URL: [Add live site URL here](https://fm-where-in-the-world.netlify.app/)
+- Solution URL: [https://github.com/thesohailjafri/Where-in-the-world](https://github.com/thesohailjafri/Where-in-the-world)
+- Live Site URL: [https://fm-where-in-the-world.netlify.app/](https://fm-where-in-the-world.netlify.app/)
 
 ## My process
 
@@ -72,7 +72,6 @@ Users should be able to:
 - Semantic HTML5 markup
 - SCSS custom properties
 - Flexbox
-- CSS flex-box
 - Desktop-first workflow
 - [React](https://reactjs.org/) - JS library
 
