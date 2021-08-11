@@ -73,7 +73,7 @@ class App extends React.Component {
       }
 
       this.setState({
-        [name]: value.trim(),
+        [name]: value,
         error: "",
         loading: true
       })
